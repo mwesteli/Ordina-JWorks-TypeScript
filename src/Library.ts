@@ -16,7 +16,6 @@ class Library {
 
         movie.render(itemSection);
         this.movies.push(movie);
-        console.log(this.movies);
     };
 
     private addBooks = () => {
@@ -25,7 +24,6 @@ class Library {
 
         book.render(itemSection);
         this.books.push(book);
-        console.log(this.books);
     };
 
     static fromJSON(data: any) : Library {
