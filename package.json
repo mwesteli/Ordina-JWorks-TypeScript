@@ -1,0 +1,19 @@
+{
+  "name": "ordina-jworks-typescript",
+  "version": "1.0.0",
+  "description": "The main goal of this exercise is to get \"Hello World\" on the screen and set up the environment.\r First we need setup our compilation from TS to JS for the browsers sake. \r Execute following command to install TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwesteli/Ordina-JWorks-TypeScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwesteli/Ordina-JWorks-TypeScript/issues"
+  },
+  "homepage": "https://github.com/mwesteli/Ordina-JWorks-TypeScript#readme"
+}
