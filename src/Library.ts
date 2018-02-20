@@ -1,22 +1,30 @@
 class Library {
-    items:Array<Item> = [];
+    movies: Array<Movie> = [];
+    books: Array<Book> = [];
 
-    constructor(){
-        let matrix  = new Movie("Matrix","thriller","tell em some",16,"PG");
-        let mobyDick = new Book("Moby Dick",new Author("Herman Malville"),"Drama","About a big fish");
+    constructor(movies: Array<Movie>, books: Array<Book>){
+        this.movies = movies;
+        this.books = books;
+    }
 
-        this.items.push(matrix);
-        this.items.push(mobyDick);
+    getAll(): Array<Item> {
+        let items: Array<Item> = [];
+
+        this.movies.forEach(movie => {
+           items.push(movie); 
+        });
+
+        this.books.forEach(book => {
+           items.push(book); 
+        });
+
+        return items;
     }
 
     static fromJSON(data: any) : Library {
-       // todo Initialise the two arrays with the external json resource
-        return null
+        let movies:Array<Movie> = data.movies.map(val => Movie.fromJSON(val));
+        let books:Array<Book> = data.books.map(val => Book.fromJSON(val));
+       return new Library(movies, books);
     }
 
-    publishItems():void{
-
-        let itemContainer: HTMLElement = document.getElementById("items");
-        this.items.forEach(item => item.render(itemContainer));
-    }
 }
