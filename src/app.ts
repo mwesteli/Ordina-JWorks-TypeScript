@@ -17,6 +17,11 @@ class Author {
     constructor(name: string) {
         this.name = name;
     }
+
+    toString = () : string => {
+
+        return `Author: ${this.name}`;
+    }
 }
 
 interface Rating {
@@ -50,16 +55,12 @@ class Movie extends Item implements Rating {
 
     render(element: HTMLElement) {
         let newElement = document.createElement("article");
-        let formatString = `
-            Movie
-            ----
-            title = ${this.title}
-            name = ${this.name}
-            genre = ${this.genre}
-            description = ${this.description}
-            age = ${this.age}
-        `;
-        newElement.innerText = formatString;
+        newElement.innerHTML =
+            "<h3>" + this.title + "</h3>" +
+            "<p>" + this.name + "</p>" +
+            "<p>" + this.genre + "</p>" +
+            "<span>" + this.description + "</span>";
+            "<span>" + this.age + "</span>";
 
         element.appendChild(newElement);
     }
@@ -68,45 +69,52 @@ class Movie extends Item implements Rating {
 class Book extends Item {
     author: Author;
 
-    constructor(title, genre, description: string) {
+    constructor(title, authorName, genre, description : string) {
         super(title, genre, description);
-        this.author = new Author("Maarten Westelinck");
+        this.author = new Author(authorName);
     }
 
     render(element: HTMLElement) {
         let newElement = document.createElement("article");
-        let formatString = `
-            Book
-            ----
-            title = ${this.title}
-            author = ${this.author}
-            genre = ${this.genre}
-            description = ${this.description}
-        `;
-        newElement.innerText = formatString;
+        newElement.innerHTML =
+            "<h3>" + this.title + "</h3>" +
+            "<p>" + this.author + "</p>" +
+            "<p>" + this.genre + "</p>" +
+            "<span>" + this.description + "</span>";
 
         element.appendChild(newElement);
     }
 }
 
 class Library {
-    items: Item[];
+    items: Array<Item>;
 
     constructor() {
-        let lotr: Book = new Book("Lord Of The Rings", "Fantasy", "You know what");
-        let ocaBook: Book = new Book("oca book", "Educational", "To OCA or not ot OCA");
+        let lotr: Book = new Book("Lord Of The Rings", "JRR Tolkien", "Fantasy", "You know what");
+        let ocaBook: Book = new Book("oca book", "Some person", "Educational", "To OCA or not ot OCA");
         let matrix: Movie = new Movie("The matrix", "test123", "matrix", 20, "matrix");
+
+        this.items = new Array<Item>();
         this.items.push(lotr, ocaBook, matrix);
     }
 
     render() {
-        let newDiv = document.createElement("div");
+        const itemSection = document.getElementById("items");
+
         this.items.forEach(item => {
-           item.render(newDiv);
+           item.render(itemSection);
         });
     }
 }
 
-publishItems("Matrix","Thriller","Did you know, Neo is the one?");
+function createAndRenderLibrary() {
+    let library = new Library();
+    console.log(library.items);
+    library.render();
+}
 
-publishItems("Moby Dick","Drama","Is this fish for real?");
+createAndRenderLibrary();
+
+// publishItems("Matrix","Thriller","Did you know, Neo is the one?");
+
+// publishItems("Moby Dick","Drama","Is this fish for real?");
